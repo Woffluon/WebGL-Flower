@@ -1,7 +1,7 @@
 # 🌸 WebGL Flower: Immersive Floral Experience
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/pmndrs/drei/master/docs/logo.png" width="100" height="100" alt="Logo" />
+  <img src="https://raw.githubusercontent.com/pmndrs/drei/refs/heads/master/docs/logo.jpg" width="100" height="100" alt="Logo" />
   <p align="center">
     <strong>A high-performance, GPU-accelerated procedural flower animation.</strong><br />
     <em>Procedural art meets modern web engineering.</em>
