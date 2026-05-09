@@ -1,0 +1,66 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript
+*.tsbuildinfo
+
+# Build outputs
+dist/
+dist-ssr/
+*.local
+build/
+out/
+
+# Tests
+coverage/
+__snapshots__/
+
+# IDEs and Editors
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Vite
+*.pcss
+.vite/
+
+# Temporary files
+*.tmp
+*.bak
+
+# Agent related
+.agents
+
+# Optional: Storybook
+.storybook-static/
+
+# Optional: Cypress
+cypress/videos/
+cypress/screenshots/
