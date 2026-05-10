@@ -1,12 +1,12 @@
 import { createPortal } from '@react-three/fiber';
-import { useFlowerPingPong } from '@/src/hooks/useFlowerPingPong';
+import { useMod2PingPong } from '@/src/hooks/useMod2PingPong';
 
-interface FlowerEffectProps {
+interface FlowerEffectMod2Props {
   isRendering: boolean;
 }
 
-export function FlowerEffect({ isRendering }: FlowerEffectProps) {
-  const { shaderScene, shaderMaterial, mainMaterial, handlePointerDown } = useFlowerPingPong(isRendering);
+export function FlowerEffectMod2({ isRendering }: FlowerEffectMod2Props) {
+  const { shaderScene, shaderMaterial, mainMaterial, handlePointerDown } = useMod2PingPong(isRendering);
 
   return (
     <>

@@ -13,8 +13,8 @@ import {
   Material,
   Timer
 } from 'three';
-import fragmentShader from '@/src/shaders/flower.frag';
-import vertexShader from '@/src/shaders/flower.vert';
+import fragmentShader from '@/src/shaders/mod1.frag';
+import vertexShader from '@/src/shaders/mod1.vert';
 
 // Configuration constants for easier tuning (P2)
 const CONFIG = {
@@ -25,7 +25,7 @@ const CONFIG = {
   BG_COLOR: 0xffffff,
 };
 
-export function useFlowerPingPong(isRendering: boolean) {
+export function useMod1PingPong(isRendering: boolean) {
   const { gl, size, camera, scene } = useThree();
   
   const targetA = useFBO();
@@ -45,6 +45,7 @@ export function useFlowerPingPong(isRendering: boolean) {
     y: CONFIG.INITIAL_POINTER.y,
     clicked: true,
     isStart: true,
+    vanishCanvas: false,
   });
 
   const backgroundColor = useMemo(() => new Color(CONFIG.BG_COLOR), []);
@@ -58,6 +59,7 @@ export function useFlowerPingPong(isRendering: boolean) {
     u_texture: { value: null as any },
     u_background_color: { value: backgroundColor },
     u_scale: { value: size.width < 768 ? 0.6 : 1.0 }, // Smaller scale for mobile
+    u_clean: { value: 1.0 },
   });
 
   const shaderMaterial = useMemo(
@@ -80,6 +82,19 @@ export function useFlowerPingPong(isRendering: boolean) {
       uniforms.current.u_scale.value = size.width < 768 ? 0.6 : 1.0;
     }
   }, [size.width, size.height]);
+
+  // Handle Clean Screen event
+  useEffect(() => {
+    const handleClean = () => {
+      pointerRef.current.vanishCanvas = true;
+      setTimeout(() => {
+        pointerRef.current.vanishCanvas = false;
+      }, 50);
+    };
+
+    window.addEventListener('clean-screen', handleClean);
+    return () => window.removeEventListener('clean-screen', handleClean);
+  }, []);
 
   useEffect(() => {
     const bgMaterial = new MeshBasicMaterial({ color: backgroundColor });
@@ -129,6 +144,7 @@ export function useFlowerPingPong(isRendering: boolean) {
   useFrame((state, delta) => {
     if (isRendering && targets.current.length === 2) {
       timer.update(); // Uses performance.now() internally in recent Three.js
+      uniforms.current.u_clean.value = pointerRef.current.vanishCanvas ? 0 : 1;
       uniforms.current.u_texture.value = targets.current[0].texture;
       uniforms.current.u_time.value = timer.getElapsed() + 0.9;
 

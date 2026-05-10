@@ -6,6 +6,7 @@ uniform vec3 u_stop_randomizer;
 uniform sampler2D u_texture;
 uniform vec3 u_background_color;
 uniform float u_scale;
+uniform float u_clean;
 
 varying vec2 vUv;
 varying float vNoise;
@@ -134,5 +135,5 @@ void main() {
         color -= is_open * pow(t, 5.) * get_dot_shape(low_noise_cursor, .01 * radius, 0.);
     }
 
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(color * u_clean, 1.0);
 }
